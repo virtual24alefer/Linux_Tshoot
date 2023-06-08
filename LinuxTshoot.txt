@@ -1,0 +1,32 @@
+Linux Troubleshooting
+
+# Since the initial issue reported is latency and high CPU utilization we will request the following log files and outputs
+
+1. File /var/log/messages
+# Check for any CPU throttle related messages
+# Look for any possible error/failure on both files
+# An example for general review
+# egrep -i "error|fail|bad" <LOGFILE>
+2. Output of:
+$ dmesg -T > /tmp/dmesg.out
+
+3. Outputs:
+# We will catch 2-5 snapshots of the top command output
+# Identify the process(es) using more resources
+# Check for the following metrics:
+# %CPU User Mode: The percentage of CPU utilization in user mode. This represents the time spent in user program execution and does not count for any time spent to complete the syscalls.
+# %CPU System Mode: This value represents the time that processes spend in kernel mode, once they hit any syscall. Anything above 15% for this field is not healthy and indicates some issue with the OS that is slowing down the syscalls.
+$ top -b -n 2 > top.txt
+$ ps -eo pcpu,pid,user,args | sort -k 1 -r | head -10
+
+# Run the below command to find the top threads that are utilizing CPU time, within a process if needed.
+$ top -H -p <PID>
+
+4. Ouput of:
+$ iostat -x -c -d 4 50 2>&1 | tee /tmp/iostat.out
+
+5. Check for memory comsuption:
+$ free -h
+$ vmstat 1 10
+
+6. With this initial information we can confirm if the issue is OS/Hardware related or application related. Knowing that we can decide next steps

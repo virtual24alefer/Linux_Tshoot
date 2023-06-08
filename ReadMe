@@ -1,0 +1,18 @@
+Linux Troubleshooting Scenario
+
+Overview
+
+Support send an alert, one our service are intermittingly down. Support advises that one of our servers
+has high latency issues, a high CPU load average, and cannot run a diagnostic application on the
+server. Which command(s) and files should the SRE review to resolve the issue?
+
+Time Permitting:
+
+Please be prepared to discuss how you might:
+• Gather more information from the Support Engineer
+• Decide when to escalate
+• How would you conduct an RCA
+• Runbook Documentation
+
+Final Deliverable
+Please create a pull/merge request that shows a ReadMe and a Runbook of how you might resolve the Linux Server Issue.
